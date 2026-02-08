@@ -2,11 +2,17 @@
 ; https://intros.c64.org/main.php?module=showintro&iid=94
 
         * = $0801
-                        .byte $f0, $08, $c0, $07, $9e, $28, $32, $33
-                        .byte $34, $33, $29, $3a, $8f, $20, $22, $0d
+                        .byte $f0, $08  ; next line (points to NIL / terminator )
+                        .byte $c0, $07  ; line number = 1984
+                        .byte $9e       ; SYS
+                        .byte $28, $32, $33, $34, $33, $29 ; (2343) =$0927
+                        .byte $3a       ; : colon
+                        .byte $8f       ; REM
+                        .byte $20, $22, $0d
                         .encode 
                         .enc "none"
-message                 .text $93, $11, $11, $11, $11, $11, $11, $11, $11, $11, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $08, $90, $d5, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c9, $0d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $dd, "   DEATH STAR   ", $dd, $0d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d 
+message                 .text $93       ; HOME
+                        .text $11, $11, $11, $11, $11, $11, $11, $11, $11, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $08, $90, $d5, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c9, $0d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $dd, "   DEATH STAR   ", $dd, $0d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d 
                         .text $1d, $1d, $1d, $dd, $0d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $dd, $12, $1c, "   ", $92, $90, " ANTI-ROM ", $12, $1c, "   ", $92, $90, $dd, $91, $9d, $dd, $0d, $0d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $dd, $a5, " ", $a7, $0d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $dd, $12, $1f, "   "
                         .text $92, $90, " (G) 1984 ", $12, $1f, "   ", $92, $90, $dd, $91, $9d, $9d, $9d, $9d, $a5, " ", $a7, $dd, $0d, $0d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d, $ca, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $c0, $cb, $0d, $05
                         .endencode 
@@ -75,7 +81,7 @@ CHROUT_loop1            lda message,x    ; CHROUT_loop ; x-ref: $0963
                         ldy #$09         ; row
                         jsr $FFF0        ; set position
                         ldx #$00
-CHROUT_loop2            lda text_druuk,x
+CHROUT_loop2            lda text_druk,x
                         beq key_wait
                         jsr $FFD2
                         inx 
@@ -138,6 +144,6 @@ key_wait                lda $C5          ; last key pressed ; x-ref: $0971, $097
                         tax 
                         .encode 
                         .enc "none"
-text_druuk              .text "DRUK OP F1 VOOR START.", $91, $91, $91, $91, $91, $91, $91, $91, $8e, $0d ; x-ref: $096e
+text_druk              .text "DRUK OP F1 VOOR START.", $91, $91, $91, $91, $91, $91, $91, $91, $8e, $0d ; x-ref: $096e
                         .endencode 
                         .byte $00, $00, $00
