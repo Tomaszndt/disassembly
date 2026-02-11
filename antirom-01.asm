@@ -71,7 +71,7 @@ entry                   sei
                         cli 
                         
                         ldx #$00
-CHROUT_loop1            lda message,x    ; CHROUT_loop ; x-ref: $0963
+CHROUT_loop1            lda message,x    ; CHROUT_loop
                         beq +		 ; terminated with #0
                         jsr $FFD2	 ; CHROUT
                         inx 
@@ -87,7 +87,7 @@ CHROUT_loop2            lda text_druk,x
                         inx 
                         bne CHROUT_loop2
                         
-key_wait                lda $C5          ; last key pressed ; x-ref: $0971, $097d
+key_wait                lda $C5          ; last key pressed
                         cmp #$04
                         bne key_wait
                         
